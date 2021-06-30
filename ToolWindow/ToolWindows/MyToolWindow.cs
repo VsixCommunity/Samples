@@ -16,8 +16,8 @@ namespace ToolWindow
 
         public override async Task<FrameworkElement> CreateAsync(int toolWindowId, CancellationToken cancellationToken)
         {
-            EnvDTE80.DTE2 dte = await VS.GetDTEAsync();
-            return new MyToolWindowControl(dte);
+            Version vsVersion = await VS.Shell.GetVsVersionAsync();
+            return new MyToolWindowControl(vsVersion);
         }
 
         [Guid("03030460-e1a2-49ab-a4c5-b7b9cfc2a4df")]

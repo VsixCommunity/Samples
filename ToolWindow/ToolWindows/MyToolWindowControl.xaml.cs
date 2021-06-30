@@ -1,4 +1,5 @@
 ﻿using Community.VisualStudio.Toolkit;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,16 +7,16 @@ namespace ToolWindow
 {
     public partial class MyToolWindowControl : UserControl
     {
-        public MyToolWindowControl(EnvDTE80.DTE2 dte)
+        public MyToolWindowControl(Version vsVersion)
         {
             InitializeComponent();
 
-            lblHeadline.Content = $"Visual Studio v{dte.Version}";
+            lblHeadline.Content = $"Visual Studio v{vsVersion}";
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            VS.Notifications.ShowMessage("ToolWindow", "Button clicked");
+            VS.MessageBox.Show("ToolWindow", "Button clicked");
         }
     }
 }
