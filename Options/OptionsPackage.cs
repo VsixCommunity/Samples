@@ -23,7 +23,7 @@ namespace Options
 
         }
 
-        private void OnSettingsSaved(object sender, General e)
+        private void OnSettingsSaved(General obj)
         {
            
         }

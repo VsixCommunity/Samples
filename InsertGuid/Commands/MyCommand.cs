@@ -1,8 +1,6 @@
 ﻿using System;
 using Community.VisualStudio.Toolkit;
-using EnvDTE;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Text.Editor;
 using Task = System.Threading.Tasks.Task;
 
 namespace InsertGuid
@@ -12,10 +10,13 @@ namespace InsertGuid
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
-            IWpfTextView view = await VS.Documents.GetCurrentTextViewAsync();
-            var position = view.Selection.Start.Position.Position;
+            DocumentView docView = await VS.Documents.GetActiveDocumentViewAsync();
+            var position = docView.TextView?.Selection.Start.Position.Position;
 
-            view.TextBuffer.Insert(position, Guid.NewGuid().ToString());
+            if (position.HasValue)
+            {
+                docView.TextBuffer.Insert(position.Value, Guid.NewGuid().ToString());
+            }
         }
     }
 }
